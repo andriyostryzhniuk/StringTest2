@@ -1,15 +1,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean name="/welcome.htm"
-          class="hello.HelloWorldController" />
+    <bean name="/"
+          class="hello.HelloWorldController" >
+        <property name="messagePrinter" ref="messagePrinter" />
+    </bean>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/JSP/" />
         <property name="suffix" value=".jsp" />
+    </bean>
+
+    <context:component-scan base-package="hello" />
+
+    <bean id="messageService" class="hello.MessageService" />
+
+    <bean id="messagePrinter" class="hello.MessagePrinter" >
+        <property name="service" ref="messageService" />
     </bean>
 
 </beans>

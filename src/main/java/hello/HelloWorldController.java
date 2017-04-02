@@ -7,12 +7,18 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HelloWorldController extends AbstractController {
 
+    private MessagePrinter messagePrinter;
+
+    public void setMessagePrinter(MessagePrinter messagePrinter) {
+        this.messagePrinter = messagePrinter;
+    }
+
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
                                                  HttpServletResponse response) throws Exception {
 
         ModelAndView modelAndView = new ModelAndView("helloWorldPage");
-        modelAndView.addObject("msg", "hello world");
+        modelAndView.addObject("msg", messagePrinter.getMessage());
 
         return modelAndView;
     }

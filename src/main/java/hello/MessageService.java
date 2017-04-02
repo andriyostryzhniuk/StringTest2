@@ -1,5 +1,8 @@
 package hello;
 
-public interface MessageService {
-    String getMessage();
+public class MessageService {
+
+    public String getMessage() {
+        return "Hello World!!!";
+    }
 }
